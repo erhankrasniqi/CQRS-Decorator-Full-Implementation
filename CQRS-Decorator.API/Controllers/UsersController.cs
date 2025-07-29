@@ -2,6 +2,7 @@
 using CQRS_Decorator.Application.Commands.CreateUser;
 using CQRS_Decorator.Application.Dispatchers;
 using CQRS_Decorator.Application.Queries;
+using CQRS_Decorator.Application.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,12 +22,14 @@ namespace CQRS_Decorator.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateUserRequest request)
+        public async Task<GeneralResponse<Guid>> Create(CreateUserRequest request)
         {
             var command = CreateUserCommand.Create(request.FirstName, request.LastName, request.Email);
             var result = await _commandDispatcher.SendAsync(command);
-            return Ok(result);
+
+            return result;
         }
+
 
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)

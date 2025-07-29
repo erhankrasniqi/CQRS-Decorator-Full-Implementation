@@ -1,4 +1,5 @@
 ﻿using CQRS_Decorator.Application.Abstractions;
+using CQRS_Decorator.Application.Responses;
 using CQRS_Decorator.Domain.Aggregates.UserAggregate;
 using CQRS_Decorator.Domain.Interfaces;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CQRS_Decorator.Application.Commands.CreateUser
 {
-    public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Guid>
+    public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, GeneralResponse<Guid>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -18,13 +19,17 @@ namespace CQRS_Decorator.Application.Commands.CreateUser
             _userRepository = userRepository;
         }
 
-        public async Task<Guid> HandleAsync(CreateUserCommand command)
+        public async Task<GeneralResponse<Guid>> HandleAsync(CreateUserCommand command)
         {
             var user = User.Create(command.FirstName, command.LastName, command.Email);
             await _userRepository.AddAsync(user);
-            return user.Id;
+
+            return new GeneralResponse<Guid>
+            {
+                Success = true,
+                Message = "User created successfully.",
+                Result = user.Id
+            };
         }
     }
-
-
 }

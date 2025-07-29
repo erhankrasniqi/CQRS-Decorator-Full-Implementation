@@ -7,6 +7,7 @@ using CQRS_Decorator.Decorators;
 using CQRS_Decorator.Domain.Interfaces;
 using CQRS_Decorator.Infrastructure.Repositories;
 using FluentValidation;
+using CQRS_Decorator.Application.Responses;
 
 namespace CQRS_Decorator.API.Extensions
 {
@@ -29,8 +30,8 @@ namespace CQRS_Decorator.API.Extensions
             services.AddHandlersAutomatically();
 
             // Decorators
-            services.Decorate<ICommandHandler<CreateUserCommand, Guid>, ValidationDecorator<CreateUserCommand, Guid>>();
-            services.Decorate<ICommandHandler<CreateUserCommand, Guid>, LoggingDecorator<CreateUserCommand, Guid>>();
+            services.Decorate<ICommandHandler<CreateUserCommand, GeneralResponse<Guid>>, ValidationDecorator<CreateUserCommand, GeneralResponse<Guid>>>();
+            services.Decorate<ICommandHandler<CreateUserCommand, GeneralResponse<Guid>>, LoggingDecorator<CreateUserCommand, GeneralResponse<Guid>>>();
 
             // FluentValidation
             services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
