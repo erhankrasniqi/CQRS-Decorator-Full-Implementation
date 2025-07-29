@@ -1,45 +1,22 @@
-using CQRS_Decorator.Application.Abstractions;
-using CQRS_Decorator.Application.Commands.CreateUser;
-using CQRS_Decorator.Application.Dispatchers;
-using CQRS_Decorator.Application.Queries;
-using CQRS_Decorator.Decorators;
-using CQRS_Decorator.Domain.Entities;
-using CQRS_Decorator.Domain.Interfaces;
-using CQRS_Decorator.Infrastructure.Data;
-using CQRS_Decorator.Infrastructure.Repositories;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
+using CQRS_Decorator.API; 
+using CQRS_Decorator.API.Extensions;
+using CQRS_Decorator.API.Middlewares;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+string corsPolicy = "CorsPolicy";
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers(); 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCorsInApplication(corsPolicy);
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.InitializeServices(builder.Configuration);  
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddProblemDetails();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-builder.Services.AddScoped<ICommandDispatcher, CommandDispatcher>();
-
-// Register handler
-builder.Services.AddScoped<ICommandHandler<CreateUserCommand, Guid>, CreateUserCommandHandler>();
-
-// Decorators
-builder.Services.Decorate<ICommandHandler<CreateUserCommand, Guid>, ValidationDecorator<CreateUserCommand, Guid>>();
-builder.Services.Decorate<ICommandHandler<CreateUserCommand, Guid>, LoggingDecorator<CreateUserCommand, Guid>>();
-
-// FluentValidation
-builder.Services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped<IQueryDispatcher, QueryDispatcher>();
-builder.Services.AddScoped<IQueryHandler<GetUserByIdQuery, User>, GetUserByIdQueryHandler>();
-builder.Services.AddScoped<IQueryHandler<GetAllUserQuery, IEnumerable<User>>, GetAllUserQueryHandler>();
 
 
 var app = builder.Build();

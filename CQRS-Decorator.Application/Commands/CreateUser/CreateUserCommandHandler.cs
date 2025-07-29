@@ -1,4 +1,5 @@
 ﻿using CQRS_Decorator.Application.Abstractions;
+using CQRS_Decorator.Domain.Aggregates.UserAggregate;
 using CQRS_Decorator.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,11 @@ namespace CQRS_Decorator.Application.Commands.CreateUser
 
         public async Task<Guid> HandleAsync(CreateUserCommand command)
         {
-            var user = Domain.Entities.User.Create(command.FirstName, command.LastName, command.Email);
+            var user = User.Create(command.FirstName, command.LastName, command.Email);
             await _userRepository.AddAsync(user);
             return user.Id;
         }
     }
+
 
 }

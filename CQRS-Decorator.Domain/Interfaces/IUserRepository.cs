@@ -1,8 +1,8 @@
-﻿using CQRS_Decorator.Domain.Entities;
+﻿using CQRS_Decorator.Domain.Aggregates.UserAggregate;
 
 namespace CQRS_Decorator.Domain.Interfaces
 {
-    
+
 
     public interface IUserRepository
     {

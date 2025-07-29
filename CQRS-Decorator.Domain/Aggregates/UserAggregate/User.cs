@@ -1,8 +1,8 @@
 ﻿using CQRS_Decorator.SharedKernel;
 
-namespace CQRS_Decorator.Domain.Entities
+namespace CQRS_Decorator.Domain.Aggregates.UserAggregate
 {
-    public class User : Entity
+    public class User : AggregateRoot<int>
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }

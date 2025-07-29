@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CQRS_Decorator.Domain.Entities;
 using CQRS_Decorator.Domain.Interfaces;
 using CQRS_Decorator.Infrastructure.Data;
+using CQRS_Decorator.Domain.Aggregates.UserAggregate;
 
 namespace CQRS_Decorator.Infrastructure.Repositories
 {
-      
+
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;

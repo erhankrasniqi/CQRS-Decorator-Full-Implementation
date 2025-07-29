@@ -1,5 +1,5 @@
 ﻿using CQRS_Decorator.Application.Abstractions;
-using CQRS_Decorator.Domain.Entities;
+using CQRS_Decorator.Domain.Aggregates.UserAggregate;
 using CQRS_Decorator.Domain.Interfaces;
 using System;
 using System.Collections.Generic;

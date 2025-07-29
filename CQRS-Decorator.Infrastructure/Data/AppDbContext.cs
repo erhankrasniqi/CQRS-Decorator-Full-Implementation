@@ -1,5 +1,5 @@
-﻿using CQRS_Decorator.Domain.Entities;
-using Microsoft.EntityFrameworkCore; 
+﻿using CQRS_Decorator.Domain.Aggregates.UserAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace CQRS_Decorator.Infrastructure.Data
 {
