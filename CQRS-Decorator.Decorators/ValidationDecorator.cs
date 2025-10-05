@@ -1,4 +1,5 @@
-﻿using CQRS_Decorator.Application.Abstractions;
+﻿
+using CQRSDecorate.Net.Abstractions;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

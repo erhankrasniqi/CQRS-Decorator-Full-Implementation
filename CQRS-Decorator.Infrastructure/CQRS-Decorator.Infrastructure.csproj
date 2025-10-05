@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CQRS-Decorator.Application\CQRS-Decorator.Application.csproj" />
     <ProjectReference Include="..\CQRS-Decorator.Domain\CQRS-Decorator.Domain.csproj" />
   </ItemGroup>
 

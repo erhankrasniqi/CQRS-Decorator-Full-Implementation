@@ -1,4 +1,5 @@
-﻿using CQRS_Decorator.Application.Abstractions;
+﻿
+using CQRSDecorate.Net.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using CQRS_Decorator.Application.Abstractions;
-using CQRS_Decorator.Application.Responses;
+﻿using CQRS_Decorator.Application.Responses;
+using CQRSDecorate.Net.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
